@@ -1,0 +1,76 @@
+# Program calculates whether a location is closer to ABQ or Denver based its coordinates.
+
+class GeoPoint:
+    def __init__(self, lat=0, lon=0, description = "TBD"):
+        self.lat = 0
+        self.lon = 0
+        self.description= ""
+    def SetPoint(self, lat, lon):
+        self.lat = lat
+        self.lon = lon
+        self.description = "TDB"
+    def GetPoint(self):
+        return (self.lat, self.lon)
+    def SetDescription(self, description):
+        self.description = description
+    def GetDescription(self):
+        return(self.description)
+    
+    def Distance(self, userloc):
+        from math import sin, cos, sqrt, atan2, radians
+        R = 3956  #radius in miles
+        lat1 = radians(self.lat)
+        lon1 = radians(self.lon)
+        lat2 = radians(userlat)
+        lon2 = radians(userlon)
+
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+        distance = R * c
+        return int(distance)
+
+    #Header
+print("Welcome User")
+print("This program calculates whether a location is closer to ABQ or Denver based its coordinates.")
+print('Lets Begin... Share with me a location by latitude and longitude in decimal degrees.')
+
+
+#Make Objects
+Denver = GeoPoint()
+Denver.SetPoint(39.7420, -104.9915)
+Denver.SetDescription('Denver')
+
+ABQ = GeoPoint()
+ABQ.SetPoint(35.1067, -106.6291)
+ABQ.SetDescription('Albuquerque')
+
+doanother = 'y'
+while doanother == 'y':
+        
+# UserInput
+        userlat = (float(input("Please enter the latitude of a location in decimal degrees: ".strip())))
+        userlon = (float(input("Please enter the longitude of a location in decimal degrees: ".strip())))
+        userlocation = (userlat, userlon)
+        userloc = GeoPoint(userlat, userlon, "User Location")
+
+# Distance Calculations
+        distanceToOne = (ABQ.Distance(userloc))
+        distanceToTwo = (Denver.Distance(userloc))
+
+# UserOutput for Distance
+        print('\nThe distance to ABQ from the location entered is', round(ABQ.Distance(userloc),2), 'miles.')
+        print('The distance to Denver from the location entered is', round(Denver.Distance(userloc),2), 'miles.')
+
+        if distanceToTwo > distanceToOne:
+            print("\nYou are closest to ", ABQ.GetDescription(), " which has coordinates of: ", ABQ.lat, ',', ABQ.lon, '.')
+        else:
+            print("\nYou are closest to",Denver.GetDescription(), "which has coordinates of: ", Denver.lat, ',', Denver.lon, '.')
+
+        doanother = input("Would you like to try again? (y/n) ")
+        if doanother == 'n':
+            print("Thanks. Goodbye!")
+            break
