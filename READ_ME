@@ -1,0 +1,25 @@
+''' In your GeoPoint class make the following changes (note your variable, parameter and method names may be different. Adjust as needed.):
+a. Add a constructor __init__(self, lat=0, lon=0,description = ‘TBD’) that will initialize the class variables __lat ,__lon and the __description. 
+Notice that the constructor will also default lat and lon to zero and description to ‘TBD’ if they are not provided.
+b. Change the SetPoint method so that instead of individual coordinates SetPoint(self, lat, lon) it takes a single sequence.
+c. Add a property: Point = property(GetPoint,SetPoint). Verify GetPoint and SetPoint are the names used for the get and set methods already written.
+d. Add a property: Description = property(GetDescription, SetDescription). Verify GetDescription and SetDescription = names in get and set methods.
+e. Change the distance method so that it takes a point instead of coordinates: Distance(self, toPoint) instead of Distance(self, lat, lon).
+ 
+    In the main part of your program do the following:
+      a. Include the class from the library file.
+      b. Instantiate two points
+      c. Instead of using SetPoint and SetDescription methods to set each of the points locations and descriptions do the following:
+    i. Use the constructor to set point1 coordinates and description. --- point1 = GeoPoint(12.3456,-123.4567,'Loc1')
+    ii. Use a constructor without any arguments to instantiate the second point and use it’s properties to set it’s values.
+              point2 = GeoPoint()     point2.PointCoords = 23.4567, -213.456 point2.PointDescription = 'Loc2'
+      d. Inside the “Do another (y/n)?” loop do the following:
+    i. Ask the user for their location.
+    ii. Create a third point to represent the user’s location. With a constructor it will look like: pointUser = GeoPoint(lat,lon, 'User Location')
+    iii. Use point1 and point2’s Distance method to find the distance from each point to the user’s location. 
+         Notice we are passing in the users point rather than the separate coordinates:
+                distanceToOne = point1.Distance(pointUser)
+                distanceToTwo = point2.Distance(pointUser)
+    iv. Tell the user which point they are closest to in this format:
+                You are closest to <description> which is located at <point’s x, y, z coordinates>
+    v. Ask “Do another (y/n)?” and loop if they respond with ‘y’. '''
